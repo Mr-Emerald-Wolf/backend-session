@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const app = express();
 
+
 // Read MongoDB connection details from environment variables
 const dbHost = process.env.DB_HOST;
 const dbPort = process.env.DB_PORT;
@@ -13,6 +14,7 @@ const dbName = process.env.DB_NAME;
 const mongoURI = `mongodb://${dbHost}:${dbPort}/${dbName}`;
 
 // C
+
 
 mongoose
   .connect(mongoURI, {
