@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
-
+// Connect to database
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
