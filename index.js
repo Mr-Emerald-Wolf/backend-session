@@ -15,7 +15,7 @@ const mongoURI = `mongodb://${dbHost}:${dbPort}/${dbName}`;
 // C
 
 mongoose
-  .connect(process.env.mongoURI, {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
