@@ -22,10 +22,9 @@ jobs:
         run: |
           # Replace this with your deployment commands
           ssh -o StrictHostKeyChecking=no -i $SSH_AUTH_SOCK shivamsharma2002@34.131.8.203 'bash -s' << 'ENDSSH'
-            cd /repo/backend-session
+            cd repo/backend-session
             sudo docker compose down
             git pull origin main
-            npm install
             sudo docker compose up --build
             # Other deployment commands
           ENDSSH
