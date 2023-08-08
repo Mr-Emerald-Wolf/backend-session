@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to GCE
         run: |
           # Replace this with your deployment commands
-          ssh -o StrictHostKeyChecking=no -i $SSH_AUTH_SOCK user@your-gce-instance-ip 'bash -s' << 'ENDSSH'
+          ssh -o StrictHostKeyChecking=no -i $SSH_AUTH_SOCK shivamsharma2002@34.131.8.203 'bash -s' << 'ENDSSH'
             cd /repo/backend-session
             sudo docker compose down
             git pull origin main
