@@ -29,7 +29,6 @@ app.use(morgan('tiny'));
 
 // Setting up routes 
 app.get("/ping", (req, res) => {
-  console.log(req);
   res.send("pong");
 });
 
