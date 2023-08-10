@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const os = require("os");
 require("dotenv").config();
 
 const app = express();
@@ -13,7 +14,6 @@ const dbName = process.env.DB_NAME;
 // Construct the MongoDB URI
 const mongoURI = `mongodb://${dbHost}:${dbPort}/${dbName}`;
 
-
 // Connecting to mongoDB
 mongoose
   .connect(mongoURI, {
@@ -25,17 +25,17 @@ mongoose
 
 // Using middleware
 app.use(express.json());
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 
-// Setting up routes 
+// Setting up routes
 app.get("/ping", (req, res) => {
-  res.send("pong");
+  res.status(200).json({ msg: "ping", hostname: os.hostname() });
 });
 
 const userRouter = require("./routes/user");
 app.use("/users", userRouter);
 
-// Starting Server 
+// Starting Server
 app.listen(8080, () => {
   console.log("Server started at port: 8080");
 });
