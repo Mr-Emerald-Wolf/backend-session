@@ -12,7 +12,7 @@ const dbPort = process.env.DB_PORT;
 const dbName = process.env.DB_NAME;
 
 // Construct the MongoDB URI
-const mongoURI = `mongodb://${dbHost}:${dbPort}/${dbName}`;
+const mongoURI = `mongodb://mongodb:27017/mydb`;
 
 // Connecting to mongoDB
 mongoose
