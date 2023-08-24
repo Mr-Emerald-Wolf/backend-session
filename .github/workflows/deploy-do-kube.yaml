@@ -3,7 +3,7 @@ name: Publish Docker Image to Docker Hub
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger on
+      - main # Change this to the branch you want to trigger on
 
 jobs:
   build-and-push:
@@ -15,10 +15,12 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - name: 'Create env file'
+        
+      - name: "Create env file"
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           cat .env
+
       - name: Build and push Docker image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -28,3 +30,16 @@ jobs:
           docker buildx create --use
           docker buildx build --push -t $DOCKER_USERNAME/cookoff:latest .
 
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 cookoff-cluster
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f $GITHUB_WORKSPACE/deployment.yaml
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/cookooff-backend-deployment
