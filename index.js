@@ -19,6 +19,8 @@ mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    tls: true,
+    ssl: true,
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
