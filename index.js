@@ -11,20 +11,6 @@ const dbHost = process.env.DB_HOST;
 const dbPort = process.env.DB_PORT;
 const dbName = process.env.DB_NAME;
 
-// Construct the MongoDB URI
-const mongoURI = process.env.DB_URI;
-
-// Connecting to mongoDB
-mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    tls: true,
-    ssl: true,
-  })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
-
 // Using middleware
 app.use(express.json());
 app.use(morgan("tiny"));
