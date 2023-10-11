@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  Build&Deploy:
+  Build_And_Deploy:
     runs-on: ubuntu-latest
 
     steps:
