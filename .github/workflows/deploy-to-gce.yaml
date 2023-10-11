@@ -1,9 +1,7 @@
 name: Build and Deploy to GCE
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
 
 jobs:
   deploy:
@@ -13,18 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up SSH keys
-        uses: webfactory/ssh-agent@v0.5.3
+      - name: multiple command
+        uses: appleboy/ssh-action@v1.0.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy to GCE
-        run: |
-          # Replace this with your deployment commands
-          ssh -o StrictHostKeyChecking=no -i $SSH_AUTH_SOCK shivamsharma2002@34.131.8.203 'bash -s' << 'ENDSSH'
-            cd repo/backend-session
-            sudo docker compose down
-            git pull origin main
-            sudo docker compose up --build -d
-            # Other deployment commands
-          ENDSSH
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: |
+            whoami
+            ls -al
