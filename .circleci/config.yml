@@ -10,7 +10,6 @@ jobs:
       - run:
           name: Build and Push Docker Image
           command: |
-
             # Build the Docker image
             docker build -t backend-session:latest .
 
@@ -38,19 +37,16 @@ jobs:
             # Use sshpass to SSH into the remote system using the password
             sshpass -p $SSH_PASS ssh $SSH_USER@$SSH_HOST "docker pull $DOCKERHUB_USERNAME/backend-session:latest && docker run -d -p 9000:8080 $DOCKERHUB_USERNAME/backend-session:latest"
 
-
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
-         context: 
-          - Deploy
+      - build:
+          context:
+            - Deploy
 
       - deploy:
           requires:
             - build
-        context: 
-          - Deploy
-
-
+          context:
+            - Deploy
