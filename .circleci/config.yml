@@ -11,7 +11,7 @@ jobs:
           name: Build and Push Docker Image
           command: |
             # Build the Docker image
-            docker build -t backend-session:latest .
+            docker build -t $DOCKERHUB_USERNAME/backend-session:latest .
 
             # Authenticate with your container registry (e.g., Docker Hub)
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
