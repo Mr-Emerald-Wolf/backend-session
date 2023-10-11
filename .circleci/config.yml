@@ -29,7 +29,7 @@ jobs:
           name: SSH into Remote System and Pull Docker Image
           command: |
             # Install sshpass to enter the SSH password
-            sudo apt-get update && sudo apt-get install -y sshpass
+            sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y sshpass
 
             # Use sshpass to SSH into the remote system using the password
             sshpass -p $SSH_PASS ssh $SSH_USER@$SSH_HOST "docker pull $DOCKERHUB_USERNAME/backend-session:latest && docker run -d -p 9000:8080 $DOCKERHUB_USERNAME/backend-session:latest"
