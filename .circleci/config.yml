@@ -44,7 +44,11 @@ workflows:
   build_and_deploy:
     jobs:
       - build
+        context: Deploy
+
       - deploy:
           requires:
             - build
+        context: Deploy
+
 
