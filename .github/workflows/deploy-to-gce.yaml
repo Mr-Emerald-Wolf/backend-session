@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  Build_And_Deploy:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +27,10 @@ jobs:
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker buildx create --use
           docker buildx build --push -t $DOCKER_USERNAME/backend-session:latest .
+  Deploy:
+      runs-on: ubuntu-latest
 
+    steps:
       - name: SSH and Deploy
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -36,5 +39,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/backend-session:latest 
-            docker run -d -p 9000:8080 ${{ secrets.DOCKER_USERNAME }}/backend-session:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/backend-session:latest 
+            sudo docker run -d -p 9000:8080 ${{ secrets.DOCKER_USERNAME }}/backend-session:latest
