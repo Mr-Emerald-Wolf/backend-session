@@ -39,7 +39,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             echo "${{ secrets.PASSWORD }}" | sudo -S docker pull ${{ secrets.DOCKER_USERNAME }}/backend-session:latest 
